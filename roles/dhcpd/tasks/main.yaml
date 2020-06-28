@@ -1,0 +1,7 @@
+---
+- name: Install dhcp-server package
+  dnf:
+    name: dhcp-server
+    state: latest
+
+# Allow home zone dhcpd

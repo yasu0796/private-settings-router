@@ -1,0 +1,15 @@
+---
+- name: install NetworkManager-ppp packages
+  dnf:
+    name: NetworkManager-ppp
+    state: latest
+
+# nmcli module doesn't support PPPoE
+#- name: setup pppoe conection
+  #nmcli:
+    #type: pppoe
+    #conn_name: PPPoE
+
+#""    nmcli connection add type pppoe ifname ens192 con-name PPPoE username "ID" password パスワード" mtu 1454
+
+# set pppoe firewalld external

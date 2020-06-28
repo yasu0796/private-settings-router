@@ -1,0 +1,58 @@
+---
+# name: set hostname
+
+- name: install dnf packages
+  dnf:
+    name:
+      - bind-utils
+      - iperf3
+      - git
+      - python3-pip
+      - pylint
+      - traceroute
+      - tcpdump
+      - nmap
+      - yamllint
+      - whois
+    state: latest
+
+# set eth0 internal
+- name: set eth0 internal
+  firewalld:
+    zone: internal
+    interface: eth0
+    permanent: yes
+    state: enabled
+    immediate: yes
+
+# set eth1 public
+- name: set eth1 public
+  firewalld:
+    zone: public
+    interface: eth1
+    permanent: yes
+    state: enabled
+    immediate: yes
+
+# set firewall rule
+- name: allow service for public zone
+  firewalld:
+    zone: public
+    service: "{{ item }}"
+    permanent: yes
+    state: enabled
+    immediate: yes
+  with_items:
+    - rdp
+    - ipsec
+
+- name: deny service for public zone
+  firewalld:
+    zone: public
+    service: "{{ item }}"
+    permanent: yes
+    state: disabled
+    immediate: yes
+  with_items:
+    - cockpit
+    - ssh

@@ -33,15 +33,15 @@ From here on out, I'm writing.
 
 
 ```bash
-sudo dnf install git ansible
-git clone https://github.com/yasu0796/private-settings-Fedora-Remix-for-WSL.git
+git clone git@github.com:yasu0796/private-settings-router.git
 ```
 
 ## 3. Run
 
 ```bash
-cd private-settings-Fedora-Remix-for-WSL/ansible
-sudo ansible-playbook -i hosts.yaml playbook-private-settings.yaml -v
+cd private-settings-router
+ansible-playbook -i hosts.yaml playbook.yaml --list-hosts
+ansible-playbook -i hosts.yaml playbook.yaml --list-tasks
 ```
 
 ## Troubleshooting
