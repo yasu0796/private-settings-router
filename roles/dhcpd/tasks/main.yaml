@@ -4,4 +4,13 @@
     name: dhcp-server
     state: latest
 
-# Allow home zone dhcpd
+- name: copy dhcpd.conf
+  copy:
+    src: ./dhcpd.conf
+    dest: /etc/dhcp/dhcpd.conf
+
+- name: Disable dhcpd service (for debug)
+  systemd:
+    name: dhcpd
+    state: stopped
+    enabled: no
