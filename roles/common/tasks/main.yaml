@@ -17,13 +17,12 @@
     state: latest
 
 # set eth0 internal
+# because https://github.com/ansible/ansible/issues/41738 , can't user firewalld module
 - name: set eth0 internal
-  firewalld:
-    zone: internal
-    interface: eth0
-    permanent: yes
-    state: enabled
-    immediate: yes
+  command: "firewall-cmd --zone=internal --permanent --add-interface=eth0"
+
+- name: reload firewalld
+  command: "firewall-cmd --reload"
 
 # set eth1 public
 - name: set eth1 public
@@ -35,16 +34,6 @@
     immediate: yes
 
 # set firewall rule
-- name: allow service for public zone
-  firewalld:
-    zone: public
-    service: "{{ item }}"
-    permanent: yes
-    state: enabled
-    immediate: yes
-  with_items:
-    - rdp
-    - ipsec
 
 - name: deny service for public zone
   firewalld:
@@ -56,3 +45,15 @@
   with_items:
     - cockpit
     - ssh
+
+# masquerade
+- name: set masquerade both internal, public
+  firewalld:
+    zone: "{{ item }}"
+    masquerade: yes
+    permanent: yes
+    state: enabled
+    immediate: yes
+  with_items:
+    - internal
+    - public
