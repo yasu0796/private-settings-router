@@ -1,16 +1,32 @@
 default-lease-time 7200;
 max-lease-time 72000;
 
+option rfc3442-classless-static-routes code 121 = array of integer 8;
+
 subnet 192.168.2.0 netmask 255.255.255.0 {
+    range 192.168.2.11 192.168.2.99;
+
     option routers 192.168.2.1;
     option subnet-mask 255.255.255.0;
     option broadcast-address 192.168.2.255;
     option domain-name "home.oyasu.info";
     option domain-name-servers 192.168.2.1;
     option time-offset 32400; # Japan Standard Time
+    option ntp-servers 219.164.211.129, 202.234.233.109; # ntp1.plala.or.jp, ntp-tk02.ocn.ad.jp
 
-    range 192.168.2.11 192.168.2.99;
+    # static routing
+    # Plala DNS 220.220.248.2/220.220.248.10 220.220.248.1/220.220.248.9
+    option rfc3442-classless-static-routes 24, 220,220,248, 192,168,2,2;
+}
 
-    host example1 { hardware ethernet 02:XX:3F:XX:XX:EF; fixed-address 192.168.16.XX; }
-    host example2 { hardware ethernet 00:XX:76:XX:XX:2F; fixed-address 192.168.16.XX;}
+host example1 { hardware ethernet 02:XX:3F:XX:XX:EF; fixed-address 192.168.16.XX; }
+host example2 { hardware ethernet 00:XX:76:XX:XX:2F; fixed-address 192.168.16.XX;}
+
+
+host unknownhost {
+    hardware ethernet 02:XX:5F:XX:XX:EF;
+    fixed-address 192.168.2.199;
+    option domain-name-servers 192.168.2.199;
+    option time-offset -32400;
+    option routers 192.168.2.199;
 }
