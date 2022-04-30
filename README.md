@@ -31,9 +31,15 @@ Install OS by private cobbler with CentOS-8.1.1911-x86_64 profile.
 
 From here on out, I'm writing.
 
-
 ```bash
+dnf install git ansible-core
 git clone git@github.com:yasu0796/private-settings-router.git
+```
+
+if install ansible-core, need to install galaxy
+
+```
+ansible-galaxy collection install -r private-settings-router/requirements.yml
 ```
 
 ## 3. Run
