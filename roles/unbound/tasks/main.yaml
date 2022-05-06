@@ -1,0 +1,5 @@
+---
+- name: Install unbound package
+  dnf:
+    name: unbound
+    state: latest
