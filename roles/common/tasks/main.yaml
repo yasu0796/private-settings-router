@@ -8,11 +8,9 @@
       - iperf3
       - git
       - python3-pip
-      - pylint
       - traceroute
       - tcpdump
       - nmap
-      - yamllint
       - whois
     state: latest
 
