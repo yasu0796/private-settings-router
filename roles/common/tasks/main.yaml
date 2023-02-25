@@ -19,7 +19,7 @@
     state: latest
 
 # set eth0 internal
-# because https://github.com/ansible/ansible/issues/41738 , can't user firewalld module
+# because https://github.com/ansible-collections/ansible.posix/issues/75 , can't use firewalld module
 - name: set eth0 internal
   command: "firewall-cmd --zone=internal --permanent --add-interface=eth0"
 
