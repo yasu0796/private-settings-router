@@ -1,5 +1,5 @@
-default-lease-time 7200;
-max-lease-time 72000;
+default-lease-time 86400;
+max-lease-time 129600;
 
 option rfc3442-classless-static-routes code 121 = array of integer 8;
 
