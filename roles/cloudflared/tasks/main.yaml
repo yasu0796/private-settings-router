@@ -1,0 +1,21 @@
+---
+# https://pkg.cloudflare.com/cloudflared-ascii.repo
+# https://docs.ansible.com/ansible/latest/collections/ansible/builtin/yum_repository_module.html
+- name: Add Cloudflare cloudflared repository
+  yum_repository:
+    name: cloudflared-stable
+    baseurl: https://pkg.cloudflare.com/cloudflared/rpm
+    gpgkey: https://pkg.cloudflare.com/cloudflare-ascii-pubkey.gpg
+    description: "cloudflared-stable"
+    gpgcheck: true
+    enabled: true
+
+- name: Install cloudflared package
+  dnf:
+    name: cloudflared
+    state: present
+
+- name: Setup cloudflared package
+  dnf:
+    name: cloudflared
+    state: present
