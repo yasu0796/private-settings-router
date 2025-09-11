@@ -16,6 +16,9 @@
     - role: unbound
       tags: unbound
 
+    - role: chronyd
+      tags: chronyd
+
     - role: pppoe
       tags: pppoe
 
