@@ -1,10 +1,11 @@
 ---
-- name: install NetworkManager-ppp packages
+- name: Install NetworkManager-ppp packages
   dnf:
     name: NetworkManager-ppp
     state: latest
 
 # nmcli module doesn't support PPPoE
+# https://docs.ansible.com/ansible/latest/collections/community/general/nmcli_module.html
 #- name: setup pppoe conection
   #nmcli:
     #type: pppoe
