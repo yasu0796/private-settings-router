@@ -3,3 +3,11 @@
   dnf:
     name: unbound
     state: present
+
+- name: Allow dns service for internal zone
+  firewalld:
+    zone: internal
+    service: dns
+    permanent: yes
+    state: enabled
+    immediate: yes
