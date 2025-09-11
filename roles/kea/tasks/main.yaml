@@ -1,0 +1,8 @@
+---
+- name: Install kea package
+  dnf:
+    name: kea
+    state: present
+  notify:
+    - restart_kea4
+    - restart_kea6
