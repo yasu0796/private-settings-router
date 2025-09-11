@@ -1,7 +1,25 @@
 ---
-- hosts: all
+- name: Main task
+  hosts: all
+  gather_facts: true
   roles:
-    - common
-    - dhcpd
-    - unbound
-#    - pppoe
+    - role: common
+      tags: common
+
+    - role: kea
+      tags: kea
+      when: "'10' in ansible_distribution_version"
+    - role: dhcpd
+      tags: dhcpd
+      when: "'9' in ansible_distribution_version"
+
+    - role: unbound
+      tags: unbound
+
+    - role: pppoe
+      tags: pppoe
+
+    - role: softether
+      tags: softether
+    - role: cloudflared
+      tags: cloudflared
