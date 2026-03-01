@@ -3,6 +3,6 @@
   firewalld:
     zone: internal
     service: ntp
-    permanent: yes
+    permanent: true
     state: enabled
-    immediate: yes
+    immediate: true

@@ -1,12 +1,12 @@
 ---
 - name: restart_kea4
-  service: 
+  service:
     name: kea-dhcp4
     state: restarted
-    enabled: yes
+    enabled: true
 
 - name: restart_kea6
-  service: 
+  service:
     name: kea-dhcp6
     state: restarted
-    enabled: yes
+    enabled: true

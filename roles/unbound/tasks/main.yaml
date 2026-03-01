@@ -8,6 +8,6 @@
   firewalld:
     zone: internal
     service: dns
-    permanent: yes
+    permanent: true
     state: enabled
-    immediate: yes
+    immediate: true
