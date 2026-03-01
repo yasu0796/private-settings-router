@@ -1,6 +1,13 @@
 ---
 # https://pkg.cloudflare.com/cloudflared-ascii.repo
 # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/yum_repository_module.html
+
+# https://docs.ansible.com/projects/ansible/latest/collections/ansible/builtin/service_facts_module.html
+
+# may be root task
+- name: Populate service facts
+  ansible.builtin.service_facts:
+
 - name: Add Cloudflare cloudflared repository
   yum_repository:
     name: cloudflared-stable
@@ -14,8 +21,14 @@
   dnf:
     name: cloudflared
     state: present
+  when:
+    - not ansible_check_mode
+    - ansible_facts['services']['cloudflared.service']['status'] | default('not-found') == 'not-found'
 
 - name: Setup cloudflared package
-  dnf:
-    name: cloudflared
-    state: present
+  command:
+    cmd: cloudflared service install {{ cloudflare_token }}
+  when:
+    - not ansible_check_mode
+    - cloudflare_token is defined
+    - ansible_facts['services']['cloudflared.service']['status'] | default('not-found') == 'not-found'
