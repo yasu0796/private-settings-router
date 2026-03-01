@@ -46,8 +46,8 @@ ansible-galaxy collection install -r private-settings-router/requirements.yml
 
 ```bash
 cd private-settings-router
-ansible-playbook -i hosts.yaml playbook.yaml --list-hosts
-ansible-playbook -i hosts.yaml playbook.yaml --list-tasks
+ansible-playbook playbook.yaml --list-hosts
+ansible-playbook playbook.yaml --list-tasks
 ```
 
 ## Troubleshooting
