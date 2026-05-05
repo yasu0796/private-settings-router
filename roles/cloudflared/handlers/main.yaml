@@ -1,0 +1,11 @@
+---
+- name: Reload systemd
+  systemd:
+    daemon_reload: true
+
+- name: Restart cloudflared
+  service:
+    name: cloudflared
+    state: restarted
+  when:
+    - not ansible_check_mode

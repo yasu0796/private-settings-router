@@ -32,3 +32,22 @@
     - not ansible_check_mode
     - cloudflare_token is defined
     - ansible_facts['services']['cloudflared.service']['status'] | default('not-found') == 'not-found'
+
+- name: Create a directory if it does not exist
+  file:
+    path: /etc/systemd/system/cloudflared.service.d
+    state: directory
+    mode: '0755'
+
+- name: Override cloudflared service file
+  copy:
+    src: override.conf
+    dest: /etc/systemd/system/cloudflared.service.d/override.conf
+    owner: root
+    group: root
+    mode: '0644'
+  when:
+    - ansible_facts['services']['cloudflared.service']['status'] | default('not-found') == 'not-found'
+  notify:
+    - Reload systemd
+    - Restart cloudflared
