@@ -6,3 +6,12 @@
     permanent: true
     state: enabled
     immediate: true
+
+- name: Copy chrony.conf
+  copy:
+    src: ./chrony.conf
+    dest: /etc/chrony.conf
+    backup: true
+    mode: '0644'
+  notify:
+    - Restart chronyd
